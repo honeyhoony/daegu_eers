@@ -8,7 +8,7 @@ import smtplib
 from email.mime.text import MIMEText
 from datetime import datetime, timedelta
 # 기존 알고리즘 모듈 가져오기
-from existing_core.collect_data import run_all_collectors
+from existing_core.collect_data import run_collectors
 
 
 # -------------------------------------------------------------
