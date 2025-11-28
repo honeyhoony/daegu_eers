@@ -10,7 +10,7 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
 import config
-from database import Base, Notice, engine  # noqa
+from backend.database import Base, Notice, engine  # noqa
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.dialects.sqlite import insert as sqlite_insert
 from sqlalchemy.exc import IntegrityError
@@ -18,6 +18,7 @@ import re, time
 from typing import Optional, Dict, Any
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import List
+
 
 try:
     from bjd_mapper import get_bjd_name
