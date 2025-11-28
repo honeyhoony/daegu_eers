@@ -8,7 +8,7 @@ import smtplib
 from email.mime.text import MIMEText
 from datetime import datetime, timedelta
 # 기존 알고리즘 모듈 가져오기
-from existing_core.collect_data import run_collectors
+#from existing_core.collect_data import run_collectors
 
 
 # -------------------------------------------------------------
@@ -246,10 +246,10 @@ def admin_update(user_id: int = Depends(require_login)):
         raise HTTPException(status_code=403, detail="관리자만 사용 가능")
 
     # 기존 알고리즘 실행
-    try:
-        run_collectors()
-        return {"status": "ok", "message": "데이터 업데이트 완료"}
-    except Exception as e:
-        return {"status": "error", "message": str(e)}
+   #try:
+    #    run_collectors()
+     #   return {"status": "ok", "message": "데이터 업데이트 완료"}
+    #except Exception as e:
+     #   return {"status": "error", "message": str(e)}
 
 
