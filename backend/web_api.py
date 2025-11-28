@@ -247,7 +247,7 @@ def admin_update(user_id: int = Depends(require_login)):
 
     # 기존 알고리즘 실행
     try:
-        run_all_collectors()
+        run_collectors()
         return {"status": "ok", "message": "데이터 업데이트 완료"}
     except Exception as e:
         return {"status": "error", "message": str(e)}
