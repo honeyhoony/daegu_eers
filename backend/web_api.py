@@ -7,6 +7,9 @@ import secrets
 import smtplib
 from email.mime.text import MIMEText
 from datetime import datetime, timedelta
+# 기존 알고리즘 모듈 가져오기
+from existing_core.collect_data import run_all_collectors
+
 
 # -------------------------------------------------------------
 # 1) 기본 설정
@@ -227,3 +230,26 @@ def save_memo(notice_id: int, body: MemoRequest, user_id: int = Depends(require_
     db.commit()
 
     return {"status": "ok"}
+
+# -------------------------------------------------------------
+# 12) (관리자) 강제 데이터 업데이트 실행
+# -------------------------------------------------------------
+@app.get("/api/admin/update")
+def admin_update(user_id: int = Depends(require_login)):
+    # 관리자 권한 확인
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT role FROM users WHERE id = ?", (user_id,))
+    role_row = cursor.fetchone()
+
+    if not role_row or role_row[0] != "admin":
+        raise HTTPException(status_code=403, detail="관리자만 사용 가능")
+
+    # 기존 알고리즘 실행
+    try:
+        run_all_collectors()
+        return {"status": "ok", "message": "데이터 업데이트 완료"}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+
