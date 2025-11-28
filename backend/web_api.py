@@ -9,6 +9,15 @@ from email.mime.text import MIMEText
 from datetime import datetime, timedelta
 # 기존 알고리즘 모듈 가져오기
 #from existing_core.collect_data import run_collectors
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # 또는 Front 도메인만 허용
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 # -------------------------------------------------------------
