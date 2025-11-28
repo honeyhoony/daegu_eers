@@ -11,9 +11,11 @@ from datetime import datetime, timedelta
 #from existing_core.collect_data import run_collectors
 from fastapi.middleware.cors import CORSMiddleware
 
+app = FastAPI()   # ⬅ 반드시 먼저 있어야 함
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # 또는 Front 도메인만 허용
+    allow_origins=["*"],  # 또는 프론트 도메인
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
